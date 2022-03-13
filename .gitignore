@@ -1,0 +1,12 @@
+node_modules
+src/**/*.js
+src/**/*.js.map
+.env
+.build/
+.idea/aws.xml
+.idea/backend-dev-assignment.iml
+.idea/codeStyles/
+.idea/modules.xml
+.idea/vcs.xml
+package-lock.json
+.idea/

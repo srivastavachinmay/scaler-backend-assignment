@@ -1,0 +1,113 @@
+openapi: 3.0.1
+info:
+  title: Scaler Assignment backend API
+  version: 1.0.0
+  description: Create, Update, Get Interview details
+servers:
+  - url: localhost:3000
+    description: Development Url
+paths:
+  /api/interview:
+    get:
+      tags:
+        - Interview
+      summary: Get a list of interviews
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  interviews:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Interview'
+    put:
+      summary: Upserts interview with the given participants
+      tags:
+        - Interview
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Interview'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InterviewUpsertReq"
+components:
+  schemas:
+    Timestamp:
+      type: string
+      format: date-time
+      description: An ISO formatted timestamp
+    Participant:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        email:
+          type: string
+        type:
+          type: string
+          enum:
+            - Interviewer
+            - Candidate
+          
+    Interview:
+      type: object
+      required:
+        - id
+        - startDateTime
+        - endDateTime
+      properties:
+        id:
+          type: number
+        startDateTime:
+          $ref: '#/components/schemas/Timestamp'
+        endDateTime:
+          $ref: '#/components/schemas/Timestamp'
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Participant'
+    InterviewUpsertReq:
+      type: object
+      properties:
+        id:
+          type: number
+        startDateTime:
+          $ref: '#/components/schemas/Timestamp'
+        endDateTime:
+          $ref: '#/components/schemas/Timestamp'
+        participants:
+          type: array
+          items:
+            type: string
+  responses:
+    ErrorResponse:
+      description: There was an error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: number
+                minimum: 200
+                maximum: 505
+              error:
+                type: string
+                description: Specific description of the error
+              message:
+                type: string
+                description: What the error was
+              data:
+                type: object
+                description: Some extra information about the error

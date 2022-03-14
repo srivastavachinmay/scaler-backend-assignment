@@ -39,6 +39,22 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/InterviewUpsertReq"
+  /api/participants:
+    get:
+      tags:
+        - Participants
+      summary: Get a list of participants
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  participants:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Participant'
 components:
   schemas:
     Timestamp:

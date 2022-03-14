@@ -1,4 +1,4 @@
-require("dotenv").config({ path: `.env.${process.env.NODE_ENV ?? 'development'}` }) // ensure we are testing in the testing env
+require("dotenv").config()
 
 
 const isTS = process.env.TS === "1";
@@ -14,9 +14,9 @@ module.exports = {
     database: uri.pathname.slice(1),
     synchronize: false,
     logging: false,
-    entities: [isTS ? "./src/entity/*.ts" : ".build/src/entity/*.js"],
-    migrations: [isTS ? "./src/migrations/*.ts" : ".build/src/migrations/*.js"],
+    entities: [isTS ? "src/entity/*.ts" : ".build/src/entity/*.js"],
+    migrations: [isTS ? "src/migrations/*.ts" : ".build/src/migrations/*.js"],
     cli: {
-        migrationsDir: "./src/migrations",
+        migrationsDir: "src/migrations",
     }
 };

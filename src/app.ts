@@ -1,15 +1,17 @@
 import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
 import * as fs from "fs";
+import cors from "cors";
 import interviewRoutes from './routes/interview-routes';
-import participantRoutes from './routes/participants-routes';
+import participantRoutes from './routes/participant-routes';
 import RequestError from "./middlewares/request-error";
 import { ErrorWithCode } from "./interfaces/error-with-code";
-import cors from 'cors';
 
 // create express app
 const app = express();
+
 app.use(cors());
+
 app.use(express.json());
 
 app.use('/api/interview', interviewRoutes);

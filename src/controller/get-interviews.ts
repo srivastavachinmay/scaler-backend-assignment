@@ -11,3 +11,15 @@ export async function getInterviews(request: Request, response: Response, next: 
 
     response.json({ interviews: res })
 }
+
+export async function getInterviewById(request: Request, response: Response, next: NextFunction) {
+    const interviewId = request.params.id
+    const interviewRepo = getManager().getRepository(Interview);
+    const res = await interviewRepo.find({
+        where: {
+            id: interviewId,
+        },
+    })
+    
+    response.json(res)
+}

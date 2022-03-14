@@ -1,8 +1,8 @@
 import * as express from 'express';
 import { check } from 'express-validator';
-import { createInterview } from "../controller/create-interview";
-import { getInterviews } from "../controller/get-interviews";
-import { singleFileUpload } from "../middlewares/file-upload";
+import { createInterview }                 from "../controller/interview/create-interview";
+import { getInterviewById, getInterviews } from "../controller/interview/get-interviews";
+import { singleFileUpload }                from "../middlewares/file-upload";
 
 const router = express.Router();
 
@@ -15,6 +15,9 @@ router.put('/',
     ],
     createInterview);
 
+
 router.get('/', getInterviews);
+
+router.get('/:id',getInterviewById )
 
 export default router;

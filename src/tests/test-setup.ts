@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv'
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` }) // ensure we are testing in the testing env
+dotenv.config()
 
 import getConnection from "../utils/get-connection";
 import { Application } from "express";
@@ -26,7 +26,7 @@ export const describeWithApp = (
         await (await conn).getRepository(Participant).delete({});
         await (await conn).getRepository(Interview).delete({});
 
-        const participantsRepo = await (await conn).getRepository(Participant)
+        const participantsRepo = await (await conn).getRepository(Participant);
 
         // Create and locally store test participants
         PARTICIPANTS = await Promise.all([1,2,3].map((x) => {
@@ -35,7 +35,7 @@ export const describeWithApp = (
                 email: `email-${x}@b.com`,
                 type: 'Candidate'
             })
-        }))
+        }));
 
         // Create and locally store test participants
         INTERVIEWERS = await Promise.all([1,2,3].map((x) => {
@@ -44,9 +44,9 @@ export const describeWithApp = (
                 email: `email-interviewer-${x}@b.com`,
                 type: 'Interviewer'
             })
-        }))
+        }));
 
-        await participantsRepo.save([...PARTICIPANTS, ...INTERVIEWERS])
+        await participantsRepo.save([...PARTICIPANTS, ...INTERVIEWERS]);
     });
 
     afterAll(async() => {

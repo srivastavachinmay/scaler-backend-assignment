@@ -34,7 +34,7 @@
     "typescript": "^3.3.3333"
   },
   "scripts": {
-    "build": "tsc",
+    "postinstall": "tsc",
     "migrate": "TS=1 ts-node ./node_modules/typeorm/cli.js migration:run",
     "migrate:revert": "TS=1 ts-node ./node_modules/typeorm/cli.js migration:revert",
     "migrate:gen": "TS=1 ts-node ./node_modules/typeorm/cli.js migration:generate -n",

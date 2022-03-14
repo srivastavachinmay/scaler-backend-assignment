@@ -8,10 +8,10 @@ export const sendMail = async ({
     text: string;
     subject: string;
 }) => {
-    sgMail.setApiKey('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');
+    sgMail.setApiKey(process.env.SENDGRID_API!);
     await sgMail.send({
         to: [...new Set(to)],
-        from: "chinmaysrivastava.cs@gmail.com",
+        from: process.env.SENDGRID_EMAIL!,
         subject,
         text,
     });

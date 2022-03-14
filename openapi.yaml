@@ -23,8 +23,9 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Interview'
+  
     put:
-      summary: Upserts interview with the given participants
+      summary: inserts interview with the given participants
       tags:
         - Interview
       responses:
@@ -39,6 +40,31 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/InterviewUpsertReq"
+  /api/interview/{id}:
+    get:
+      tags:
+        - Interview
+      summary: Get interview by Id
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The user ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  interviews:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Interview'
+  
   /api/participants:
     get:
       tags:

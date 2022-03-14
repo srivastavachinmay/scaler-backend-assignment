@@ -89,7 +89,7 @@ export async function createInterview(request: Request, response: Response, next
     await sendMail({
         to: interview.participants,
         subject: "Interviewbit Engineering Role Interview",
-        text: `Timing: ${interview.startDateTime} - ${interview.endDateTime}`
+        text: `Timing: ${interview.startDateTime.toLocaleString()} - ${interview.endDateTime.toLocaleString()}`
     }).catch((err) => {
         console.log(`Error sending email to participants: ${interview.participants}, err: ${err}`)
     });

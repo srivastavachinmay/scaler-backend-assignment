@@ -25,6 +25,7 @@
   "dependencies": {
     "@fast-csv/parse": "^4.3.6",
     "@sendgrid/mail": "^7.6.2",
+    "@types/sendgrid": "^4.3.0",
     "cors": "^2.8.5",
     "dotenv": "^14.3.2",
     "express": "^4.16.3",
@@ -35,7 +36,7 @@
     "typescript": "^3.3.3333"
   },
   "scripts": {
-    "postinstall": "tsc && yarn migrate",
+    "build": "tsc && yarn migrate",
     "migrate": "TS=1 ts-node ./node_modules/typeorm/cli.js migration:run",
     "migrate:revert": "TS=1 ts-node ./node_modules/typeorm/cli.js migration:revert",
     "migrate:gen": "TS=1 ts-node ./node_modules/typeorm/cli.js migration:generate -n",

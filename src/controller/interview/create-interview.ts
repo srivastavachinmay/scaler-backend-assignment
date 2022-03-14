@@ -3,6 +3,7 @@ import { getManager } from "typeorm";
 import { IInterview, Interview } from "../../entity/Interview";
 import RequestError from "../../middlewares/request-error";
 import { Participant } from "../../entity/Participant";
+import { sendMail } from "../../utils/email-handler";
 
 export async function createInterview(request: Request, response: Response, next: NextFunction) {
     const interviewRepository = getManager().getRepository(Interview);
@@ -84,5 +85,15 @@ export async function createInterview(request: Request, response: Response, next
     });
 
     const res = await interviewRepository.save({ ...interview, participants });
+
+    await sendMail({
+        to: interview.participants,
+        subject: "Interviewbit Engineering Role Interview",
+        text: `Timing: ${interview.startDateTime} - ${interview.endDateTime}`
+    }).catch((err) => {
+        console.log(`Error sending email to participants: ${interview.participants}, err: ${err}`)
+    });
+
+
     response.json({ ...interview, id: res.id })
 }
